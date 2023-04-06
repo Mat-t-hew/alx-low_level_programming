@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 /**
- * @Struct list_s - Singly linked list
+ * @Struct list_s: Singly linked list
  * @Str: String
  * @len: Length of string
  * @next: Points to the next node
