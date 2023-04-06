@@ -20,7 +20,6 @@ size_t listint_len(const listint_t *h)
 	}
 
 	do {
-		printf("%d\n", h->n);
 		nodes++;
 		h = h->next;
 	} while (h != NULL);
