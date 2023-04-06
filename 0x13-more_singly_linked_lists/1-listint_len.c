@@ -2,8 +2,6 @@
 #include <stdio.h>
 
 /**
- * main - Entry point
- *
  * listint_len - a function that returns number of elements in listint_t list
  *
  * @h: A pointer to head of list_t list
@@ -14,14 +12,18 @@
 size_t listint_len(const listint_t *h)
 
 {
-	size_t s;
+	size_t nodes = 0;
 
-	s = 0;
+	if (h == NULL)
+	{
+		return (nodes);
+	}
 
 	do {
 		printf("%d\n", h->n);
-		s++;
+		nodes++;
 		h = h->next;
 	} while (h != NULL);
-	return (s);
+
+	return (nodes);
 }
