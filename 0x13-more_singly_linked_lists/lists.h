@@ -3,9 +3,8 @@
 #include <stdlib.h>
 
 /**
- * @Struct list_s: Singly linked list
- * @Str: String
- * @len: Length of string
+ * @Struct listint_s: Singly linked list
+ * @n:integer
  * @next: Points to the next node
  *
  * Description: Singly linked list node structure project
