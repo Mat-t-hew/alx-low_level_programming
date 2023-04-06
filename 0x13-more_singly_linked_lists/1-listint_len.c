@@ -11,8 +11,6 @@
  * Return: the number of elements
  */
 
-int main(void)
-
 {
 	size_t listint_len(const listint_t *h)
 	{
