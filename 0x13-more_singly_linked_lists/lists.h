@@ -4,10 +4,11 @@
 
 /**
  * struct listint_s - singly linked list
- * @n:integer
+ * @n: integer
  * @next: Points to the next node
  *
  * Description: Singly linked list node structure project
+ *
  */
 
 typedef struct listint_s

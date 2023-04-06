@@ -4,24 +4,24 @@
 /**
  * main - Entry point
  *
- * @print_listint: A function that prints all the elements of a listint_t list
+ * print_listint - A function that prints all the elements of a listint_t list
  *
  * @h: A pointer to head of list_t list
  *
- * Return: Always s (Success)
+ * Return: the number of nodes
  */
 
 size_t print_listint(const listint_t *h)
 
 {
-	size_t s;
+	size_t nodes;
 
-	s = 0;
+	nodes = 0;
 
 	do {
 		printf("%d\n", h->n);
-		s++;
+		nodes++;
 		h = h->next;
 	} while (h != NULL);
-	return (s);
+	return (nodes);
 }
