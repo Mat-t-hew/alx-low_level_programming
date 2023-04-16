@@ -17,7 +17,9 @@ int get_bit(unsigned long int n, unsigned int idx)
 	{
 		return (-1);
 	}
-	unsigned long int a = 1UL << idx;
+	unsigned long int a = 1;
 
-	return ((n & a) ? 1 : 0);
+	a <<= idx;
+
+	return ((n & a) >> idx);
 }
