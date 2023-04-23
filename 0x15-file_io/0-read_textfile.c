@@ -4,9 +4,9 @@
  * read_textfile - function that reads a text file
  * & prints to POSIX standard output
  *
- * @fn: *filename
+ * @filename: *filename
  *
- * @l: letters to read and print
+ * @letters: letters to read and print
  *
  * Return: actual number of letters it could read and print or 0 if =
  * file can not be opened or read
@@ -14,56 +14,46 @@
  * write fails or does not write expected amount of bytes
  */
 
-ssize_t read_textfile(const char *fn, size_t l)
+ssize_t read_textfile(const char *filename, size_t letters)
 {
-	
-	if (fn == NULL)
-	{
-		return (0);
+	ssize_t o, r, w, total_bytes = 0;
+	char *buffer;
 
-	}
-
-	int f = open(fn, O_RDONLY);
-
-	if (f == -1)
+	if (filename == NULL)
 	{
 		return (0);
 	}
 
-	char *b = malloc(l);
-
-	if (b == NULL)
+	buffer = malloc(sizeof(char) * letters);
+	if (buffer == NULL)
 	{
-		close(f);
 		return (0);
 	}
 
-	ssize_t tb = 0;
-	ssize_t br;
+	o = open(filename, O_RDONLY);
+	if (o == -1)
+	{
+		free(buffer);
+		return (0);
+	}
 
-	do {
-		br = read(f, b, l);
-		if (br == -1)
+	while ((r = read(o, buffer, letters)) > 0)
+	{
+		w = write(STDOUT_FILENO, buffer, r);
+		if (w == -1)
 		{
-			free(b);
-			close(f);
+			free(buffer);
+			close(o);
 			return (0);
 		}
+		total_bytes += r;
+	}
+	free(buffer);
+	close(o);
 
-		ssize_t bw = write(STDOUT_FILENO, b, br);
-
-		if (bw == -1 || bw != br)
-		{
-			free(b);
-			close(f);
-			return (0);
-		}
-
-		tb += bw;
-	} while (br > 0);
-
-	free(b);
-	close(f);
-
-	return (tb);
+	if (r == -1)
+	{
+		return (0);
+	}
+	return (total_bytes);
 }
