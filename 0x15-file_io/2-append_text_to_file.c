@@ -17,23 +17,28 @@ int append_text_to_file(const char *filename, char *text_content)
 		return (-1);
 	}
 
-	int f = open(filename, O_WRONLY | O_APPEND | O_CREAT, 0664);
+	int f = open(filename, O_WRONLY | O_APPEND);
 
 	if (f == -1)
 	{
+		perror("open");
 		return (-1);
 	}
 
-	ssize_t bw = 0;
+	ssize_t n = write(f, text_content, strlen(text_content));
 
-	if (text_content != NULL)
+	if (n == -1)
 	{
-		size_t l = strlen(text_content);
-
-		bw = write(f, text_content, l);
+		perror("write");
+		close(f);
+		return (-1);
 	}
 
-	close(f);
+	if (close(f) == -1);
+	{
+		perror("close");
+		return (-1);
+	}
 
-	return ((bw == -1) ? -1 : 1);
+	return (1);
 }
