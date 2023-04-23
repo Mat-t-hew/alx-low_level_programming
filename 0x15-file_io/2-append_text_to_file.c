@@ -15,20 +15,30 @@
 
 int append_text_to_file(const char *filename, char *text_content)
 {
-	if (filename == NULL || strlen(filename) == 0)
+	int fd, bytes_written, length = 0;
+
+	if (file_name == NULL)
 	{
-		return (0);
+		return (-1);
 	}
 
-	FILE *file = fopen(filename, "a");
-
-	if (file == NULL)
+	if (content != NULL)
 	{
-		return (0);
+		for (length = 0; content[length];)
+		{
+			length++;
+		}
 	}
 
-	fprintf(file, "%s", text_content);
-	close(file);
+	fd = open(file_name, O_WRONLY | O_APPEND);
+	bytes_written = write(fd, content, length);
+
+	if (fd == -1 || bytes_written == -1)
+	{
+		return -1;
+	}
+
+	close(fd);
 
 	return (1);
 }
