@@ -24,9 +24,10 @@ int append_text_to_file(const char *filename, char *text_content)
 		return (-1);
 	}
 
-	int r = append(f, text_content, strlen(text_content));
+	size_t len = strlen(text_content);
+	ssize_t bw = write(f, text_content, len);
 
 	close(f);
 
-	return ((r == -1) ? -1 : 1);
+	return ((bw == (ssize_t)len) ? -1 : 1);
 }
