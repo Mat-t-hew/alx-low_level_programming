@@ -20,7 +20,7 @@ void print_binary(unsigned long int n)
 
 	while (b > 0)
 	{
-		putchar((n & b) ? '1' : '0')
+		putchar((n & b) ? '1' : '0');
 			b >>= 1;
 	}
 }
