@@ -50,12 +50,18 @@ int main(int argc, char *argv[])
 	while ((nchars = read(file_from, buf, sizeof(buf))) > 0)
 	{
 		nwr = write(file_to, buf, nchars);
-		if (nwr == -1)
-			error_file(file_from, file_to, argv);
+	if (nwr == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
+	}
 	}
 
 	if (nchars == -1)
-		error_file(file_from, file_to, argv);
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
+	}
 
 	err_close = close(file_from);
 	if (err_close == -1)
