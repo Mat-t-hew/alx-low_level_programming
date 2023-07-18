@@ -43,9 +43,12 @@ void print_magic(const unsigned char *e_ident)
 
 void print_class(const unsigned char *e_ident)
 {
-	printf("  Class:   ");
+	printf("  Class:                             ");
 	switch (e_ident[4])
 	{
+		case ELFCLASSNONE:
+			printf("none\n");
+			break;
 		case 1:
 			printf("ELF32\n");
 			break;
@@ -65,7 +68,8 @@ void print_class(const unsigned char *e_ident)
 
 void print_data(const unsigned char *e_ident)
 {
-	printf("  Data:    ");
+	printf("  Data:                              ");
+
 	switch (e_ident[5])
 	{
 		case 1:
@@ -87,7 +91,8 @@ void print_data(const unsigned char *e_ident)
 
 void print_version(const unsigned char *e_ident)
 {
-	printf("  Version: %d (current)\n", e_ident[6]);
+	printf("  Version:                           %d",
+			e_ident[EI_VERSION]);
 }
 
 /**
@@ -97,7 +102,7 @@ void print_version(const unsigned char *e_ident)
 
 void print_os_abi(const unsigned char *e_ident)
 {
-	printf("  OS/ABI:  ");
+	printf("  OS/ABI:                            ");
 	switch (e_ident[EI_OSABI])
 	{
 		case ELFOSABI_SYSV:
@@ -145,7 +150,9 @@ void print_os_abi(const unsigned char *e_ident)
  */
 void print_abi_version(const unsigned char *e_ident)
 {
-	printf("  ABI Version: %d\n", e_ident[8]);
+	printf("  ABI Version:                       %d\n",
+			e_ident[EI_ABIVERSION]);
+
 }
 
 /**
@@ -155,7 +162,7 @@ void print_abi_version(const unsigned char *e_ident)
 
 void print_type(uint16_t e_type)
 {
-	printf("  Type:    ");
+	printf("  Type:                              ");
 	switch (e_type)
 	{
 		case ET_NONE:
