@@ -98,40 +98,40 @@ void print_version(const unsigned char *e_ident)
 void print_os_abi(const unsigned char *e_ident)
 {
 	printf("  OS/ABI:  ");
-	switch (e_ident[7])
+	switch (e_ident[EI_OSABI])
 	{
-		case 0:
-			printf("UNIX System V ABI\n");
+		case ELFOSABI_SYSV:
+			printf("UNIX - System V\n");
 			break;
-		case 1:
-			printf("HP-UX ABI\n");
+		case ELFOSABI_HPUX:
+			printf("HP-UX\n");
 			break;
-		case 2:
-			printf("NetBSD ABI\n");
+		case ELFOSABI_NETBSD:
+			printf("NetBSD\n");
 			break;
-		case 3:
-			printf("Linux ABI\n");
+		case ELFOSABI_LINUX:
+			printf("Linux\n");
 			break;
-		case 6:
-			printf("Sun Solaris ABI\n");
+		case ELFOSABI_SOLARIS:
+			printf("Solaris\n");
 			break;
-		case 7:
-			printf("IBM AIX ABI\n");
+		case ELFOSABI_AIX:
+			printf("AIX\n");
 			break;
-		case 8:
-			printf("SGI IRIX ABI\n");
+		case ELFOSABI_IRIX:
+			printf("IRIX\n");
 			break;
-		case 9:
-			printf("FreeBSD ABI\n");
+		case ELFOSABI_FREEBSD:
+			printf("FreeBSD\n");
 			break;
-		case 10:
-			printf("Compaq TRU64 UNIX ABI\n");
+		case ELFOSABI_TRU64:
+			printf("TRU64\n");
 			break;
-		case 11:
-			printf("Novell Modesto ABI\n");
+		case ELFOSABI_MODESTO:
+			printf("Modesto\n");
 			break;
-		case 12:
-			printf("OpenBSD ABI\n");
+		case ELFOSABI_OPENBSD:
+			printf("OpenBSD\n");
 			break;
 		default:
 			printf("Unknown\n");
