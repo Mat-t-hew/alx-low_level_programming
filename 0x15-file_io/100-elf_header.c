@@ -186,7 +186,11 @@ void print_type(uint16_t e_type)
 
 void print_entry_point(uint64_t e_entry)
 {
+	#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 	printf("  Entry point address: 0x%llx\n", (unsigned long long)e_entry);
+#else
+	printf("  Entry point address: 0x%lx\n", (unsigned long)e_entry);
+#endif
 }
 
 /**
@@ -197,12 +201,12 @@ void print_entry_point(uint64_t e_entry)
 void print_elf_header(const char *file_name)
 {
 	int fd = open(file_name, O_RDONLY);
+	unsigned char e_ident[ELF_HEADER_SIZE];
+	ssize_t ret = read(fd, e_ident, ELF_HEADER_SIZE);
+	Elf64_Ehdr *header = (Elf64_Ehdr *)e_ident;
 
 	if (fd == -1)
 		print_error("Unable to open the file");
-
-	unsigned char e_ident[ELF_HEADER_SIZE];
-	ssize_t ret = read(fd, e_ident, ELF_HEADER_SIZE);
 
 	if (ret != ELF_HEADER_SIZE)
 		print_error("Unable to read the ELF header");
@@ -216,8 +220,6 @@ void print_elf_header(const char *file_name)
 	print_version(e_ident);
 	print_os_abi(e_ident);
 	print_abi_version(e_ident);
-
-	Elf64_Ehdr *header = (Elf64_Ehdr *)e_ident;
 
 	print_type(header->e_type);
 	print_entry_point(header->e_entry);

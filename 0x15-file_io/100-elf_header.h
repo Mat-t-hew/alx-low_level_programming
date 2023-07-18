@@ -10,7 +10,7 @@
  *
  * This structure represents the ELF header format for 64-bit architectures.
  * It contains various fields providing information about the ELF file.
- */
+ *
 
 typedef struct
 {
@@ -29,7 +29,7 @@ typedef struct
 	uint16_t e_shnum;
 	uint16_t e_shstrndx;
 } Elf64_Ehdr;
-
+*/
 void print_error(const char *message);
 void print_magic(const unsigned char *e_ident);
 void print_class(const unsigned char *e_ident);
