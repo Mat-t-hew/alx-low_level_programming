@@ -28,6 +28,7 @@ void print_error(const char *message)
 void print_magic(const unsigned char *e_ident)
 {
 	int i;
+
 	printf("  Magic:   ");
 
 	for (i = 0; i < 16; i++)
@@ -236,6 +237,7 @@ void print_elf_header(const char *file_name)
 int main(int argc, char *argv[])
 {
 	const char *file_name = argv[1];
+
 	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
