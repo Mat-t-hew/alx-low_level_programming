@@ -1,4 +1,4 @@
-#include <stddef.h>
+#include "lists.h"
 
 /**
  * dlistint_len - computes the number of nodes in a list
